@@ -1,0 +1,262 @@
+.myContent {
+  width: 90%;
+  margin: 80px auto 80px auto;
+}
+
+body {
+  height: 750px;
+  background: #EFFDF5;
+}
+
+* {
+  box-sizing: border-box !important;
+
+}
+
+.row {
+  padding: 0;
+  margin: 0;
+}
+
+strong {
+  margin: 20px 0 !important;
+}
+
+.formContent {
+  padding: 10px;
+  width: 90%;
+  margin: 25px auto;
+}
+
+.myTitle {
+  color: #00B98E;
+  padding: 8px;
+  font-size: 23px;
+  text-align: center;
+  border-bottom: 4px solid #00B98E;
+}
+
+.outLine {
+  border: 2px solid #00B98E;
+  background: white;
+
+}
+
+.fixedInput {
+  line-height: 23px;
+  width: 100%;
+  padding: 3px 15px;
+  border-radius: 30px;
+  border: solid 1px gray;
+  background: #EFFDF5;
+  color: gray;
+}
+
+.fixedInput2, .fixedInputNote {
+  line-height: 23px;
+  width: 100%;
+  padding: 3px 15px;
+  border: solid 1px gray;
+  background: white;
+
+}
+
+.fixedInput2 {
+  border-radius: 30px;
+}
+
+.fixedInput2:focus, .fixedInputNote:focus {
+  outline: solid 2px #00B98E;
+}
+
+
+.form_group {
+  margin: 25px 0;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  height: 100px;
+}
+
+textarea:focus {
+  border: none !important;
+  outline: 2px solid #00B98E !important;
+}
+
+.myButton {
+  max-width: 150px;
+  min-width: 25px;
+  border-radius: 20px;
+  box-shadow: 0 3px 5px #a8a8a8;
+  margin: 1px 10px;
+  padding: 5px 10px;
+  height: max-content !important;
+  border: solid 1px transparent;
+  color: white;
+  background: #00B98E;
+  transition: background-color 350ms, color 350ms, border 350ms;
+}
+
+.myButton:hover {
+  color: #00B98E;
+  border: solid 1px #00B98E;
+  background: white;
+}
+
+
+.support {
+  margin: 5px;
+  color: white;
+  background: #00B98E;
+  padding: 10px;
+}
+
+.leftItem, .leftItem2 {
+
+}
+
+.leftItem2 {
+  margin-top: 25px;
+}
+
+
+.detailContent {
+  width: 100%;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  color: #00B98E;
+  padding: 10px;
+}
+
+.total {
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  color: #dc3545;
+}
+
+.col-8 {
+  background: #EFFDF5;
+}
+
+
+/*tab html*/
+
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  border-top: none;
+}
+
+
+/* Style tab links */
+.tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 25%;
+}
+
+.tablink:hover {
+  background-color: #777;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+
+  display: none;
+  padding: 53px 0;
+  height: 100%;
+}
+
+.padding_unset {
+  padding: unset;
+}
+
+.paypal {
+
+  margin: 15px auto;
+  width: 25%;
+}
+
+.imgPadding {
+  margin-top: 25px;
+  padding: 5px 0;
+}
+
+.myBG {
+  background-color: #EFFDF5;
+}
+
+.myImg {
+  margin-top: 45px;
+  margin-bottom: 34px;
+  width: 80%;
+  height: auto;
+}
+
+.bankImg {
+  cursor: pointer;
+  width: 70%;
+  height: auto;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.my_border:hover {
+  border: solid 1px #00B98E;
+}
+
+.my_border {
+  border: solid 1px transparent;
+  transition: border 400ms;
+}
+
+.center {
+  display: flex !important;
+  align-content: center !important;
+  justify-content: center !important;
+}
+
+.margin_top{
+  margin-top: 50px;
+}
+

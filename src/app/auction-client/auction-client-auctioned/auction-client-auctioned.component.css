@@ -1,0 +1,222 @@
+
+
+.box_shadow {
+  padding: 0;
+  background: white;
+  border: 2px solid #00B98E;
+}
+
+.my_background {
+  box-sizing: border-box;
+  padding: 0;
+  background: #EFFDF5;
+}
+
+.myContent {
+  width: 90%;
+  margin: 80px auto 80px auto;
+}
+
+.outLine {
+  box-shadow: 0 0 8px gray;
+}
+
+.tableContent {
+  width: 90%;
+  margin: 25px auto;
+}
+
+.myTitle {
+  color: #00B98E;
+  padding: 8px;
+  font-size: 23px;
+  text-align: center;
+  border-bottom: 4px solid #00B98E;
+}
+
+.myCartTab {
+  color: #00B98E;
+  padding: 8px;
+  font-size: 23px;
+  text-align: center;
+  border-bottom: 4px solid #00B98E;
+}
+
+
+.imageProduct {
+  max-width: 100%;
+  height: auto;
+}
+
+.myTable {
+  background: #e2e2e2;
+}
+
+.product {
+  max-width: 35%;
+}
+
+.tdImage {
+  width: 70%;
+}
+
+.quantity {
+  margin: 15px 0 15px 0 !important;
+  width: fit-content;
+  line-height: 23px;
+  font-size: 18px;
+  border-radius: 100px;
+}
+
+
+.myTable th {
+  padding: 10px 15px 10px 15px;
+  color: white !important;
+  background: #00B98E;
+}
+.myTable td {
+  padding: 10px 15px 20px 15px;
+  border-bottom: solid 3px white;
+}
+
+.non_button {
+  background: transparent !important;
+  border: none !important;
+}
+
+.myButton {
+  padding: 1px;
+  font-size: 18px;
+  font-weight: bold;
+  width: 100% !important;
+  height: max-content !important;
+  border-radius: 30px;
+  border: solid 1px transparent;
+  color: white;
+  background: limegreen;
+  transition: background-color 300ms, color 300ms, border 300ms;
+}
+
+.myButtonDisable{
+  padding: 1px;
+  font-size: 18px;
+  font-weight: bold;
+  width: 100% !important;
+  height: max-content !important;
+  border-radius: 30px;
+  border: solid 1px transparent;
+  color: white;
+  background: gray;
+  cursor: no-drop;
+  transition: background-color 300ms, color 300ms, border 300ms;
+  pointer-events: none !important;
+}
+
+.myButton:hover {
+  background: #138413;
+}
+
+.button_up, .button_down {
+  padding: 0 6px !important;
+  cursor: pointer;
+  border: solid 1px transparent;
+  line-height: 23px;
+  text-align: center;
+  height: 23px;
+  width: 23px;
+  color: white;
+  background: #00B98E;
+  transition: background-color 300ms, color 300ms, border 300ms;
+}
+
+.button_up:hover, .button_down:hover {
+  border: solid 1px #00B98E;
+  background-color: white;
+  color: #00B98E;
+}
+
+.button_down {
+  border-radius: 100px 0 0 100px;
+}
+
+.button_up {
+  border-radius: 0px 100px 100px 0px;
+}
+
+.numb {
+  padding: 0 8px !important;
+}
+
+.note {
+  background: #EFFDF5;
+  padding: 4px 8px;
+  width: fit-content;
+  text-align: center;
+  box-shadow: 3px 3px 5px grey;
+  border-radius: 20px;
+}
+
+.price {
+  margin: 0 auto;
+  font-weight: bold;
+}
+
+.myPrice {
+  color: #00B98E;
+}
+
+.payNow {
+  text-align: center;
+  margin: 15px auto;
+}
+
+.payNow input {
+  position: relative;
+  height: 20px;
+  width: 20px;
+  border: none !important;
+  top: 5px;
+}
+
+.myPageLink, .myPageLink2 {
+  padding: 8px;
+  text-decoration: none;
+  color: #00B98E;
+  transition: background-color 300ms, color 300ms, border 300ms;
+}
+
+.myPageLink {
+  cursor: unset !important;
+  background: #EFFDF5;
+}
+
+.myPageLink2 {
+  cursor: pointer;
+  background: #00B98E;
+  color: white;
+}
+
+.myPageLink2:hover {
+  background: #005341;
+  color: white;
+}
+
+/*LongTK*/
+/*Bảng tóm tắt và hoàn tất*/
+
+.myPadding {
+  padding: 0 60px 40px 60px;
+}
+
+.marin20 {
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.fa-truck-fast {
+  font-size: 20px;
+}
+
+.tabs .nav-link.active {
+  background-color: #00B98E !important;;
+}

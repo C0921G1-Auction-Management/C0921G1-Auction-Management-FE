@@ -7,6 +7,9 @@ import {ProductListComponent} from './product-list/product-list.component';
 import {ProductEditComponent} from './product-edit/product-edit.component';
 import {ProductApprovalComponent} from './product-approval/product-approval.component';
 import {InstructionComponent} from './instruction/instruction.component';
+import {AuctionClientAuctionedComponent} from "../auction-client/auction-client-auctioned/auction-client-auctioned.component";
+import {AuctionClientPaypalComponent} from "../auction-client/auction-client-paypal/auction-client-paypal.component";
+
 
 const routes: Routes = [
   {
@@ -26,6 +29,12 @@ const routes: Routes = [
   },
   {
     path: 'product/approval', component: ProductApprovalComponent
+  },
+  {
+    path: 'product/auctioned', component: AuctionClientAuctionedComponent
+  },
+  {
+    path: 'product/payment', component: AuctionClientPaypalComponent
   }
 ];
 

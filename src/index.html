@@ -6,8 +6,37 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!--  LongTK-->
+  <script src="https://kit.fontawesome.com/96acfb273f.js" crossorigin="anonymous"></script>
+  <!--  LongTK-->
+  <script
+    src="https://www.paypal.com/sdk/js?client-id=AccxVAidlde9F2UUHiCWmeHPsrWnM2nL74rKmf8-ctA0JcYMcp7_6vxn4NQWNr-OgtcEYZM9t8p_H93Q"></script>
+  <!--  LongTK-->
+  <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 </head>
 <body>
-  <app-root></app-root>
+<app-root></app-root>
+
+<!--  LongTK-->
+<script>
+  function openPage(pageName, elmnt, color) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].style.backgroundColor = "";
+    }
+    document.getElementById(pageName).style.display = "block";
+    elmnt.style.backgroundColor = color;
+  }
+
+  // Get the element with id="defaultOpen" and click on it
+</script>
+
+
 </body>
 </html>

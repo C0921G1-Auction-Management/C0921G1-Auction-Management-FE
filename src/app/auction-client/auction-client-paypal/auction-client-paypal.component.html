@@ -1,1 +1,262 @@
-<p>Phần của LongTK</p>
+<div class="myBG">
+  <div class=" myContent">
+    <div class="row">
+
+      <div class="col-md-8 col-12 padding_unset">
+
+
+        <button class="tablink" onclick="openPage('News', this, ' #00B98E')" id="defaultOpen">Địa chỉ thanh toán
+        </button>
+        <button class="tablink" onclick="openPage('Contact', this, ' #00B98E')" id="secondOpen">Hình thức giao
+          hàng
+        </button>
+        <!--                <button class="tablink" onclick="openPage('About', this, ' #00B98E')">Tình trang đơn hàng</button>-->
+        <button class="tablink">Tình trạng đơn hàng</button>
+
+        <div id="News" class="tabcontent">
+          <div class=" outLine">
+            <div class="myTitle">
+              ĐỊA CHỈ GIAO HÀNG
+            </div>
+            <div *ngIf="isLoaded" class="formContent">
+
+              <div class="row form_group">
+                <div class="col-md-3 col-12">
+                  Họ và tên
+                </div>
+                <div class="col-md-9 col-12">
+                  <div class="fixedInput">
+                    {{member.name}}
+                  </div>
+                </div>
+              </div>
+
+              <div class="row form_group">
+                <div class="col-md-3 col-12">
+                  Thành phố {{memberCity}}
+                </div>
+                <div class="col-md-9 col-12">
+                  <select class="fixedInput2" name="city" id="cityselect" (change)="choseCity($event)">
+                    <option
+                      [value]="city" *ngFor="let city of citiesList"
+                      [selected]="city == 'Hà Nội'"
+                    > {{city}}</option>
+
+                  </select>
+
+                </div>
+              </div>
+
+              <div class="row fo0rm_group">
+                <div class="col-md-3 col-12">
+                  Địa chỉ
+                </div>
+                <div class="col-md-9 col-12">
+                  <input class="fixedInput2" type="text" (blur)="changeAddress($event)" [value]="memberAddress"
+                         (keydown.enter)="changeAddress($event)">
+                </div>
+              </div>
+              <div class="row form_group">
+                <div class="col-md-3 col-12">
+                  Email
+                </div>
+                <div class="col-md-9 col-12">
+                  <div class="fixedInput">
+                    {{member.email}}
+                  </div>
+                </div>
+              </div>
+              <div class="row form_group">
+                <div class="col-md-3 col-12">
+                  Di động
+                </div>
+                <div class="col-md-9 col-12">
+                  <div class="fixedInput">
+                    {{member.phoneNumber}}
+                  </div>
+                </div>
+              </div>
+              <div class="row form_group">
+                <div class="col-md-3 col-12">
+                  Hướng dẫn giao hàng  {{deliveryNote}}
+                </div>
+                <div class="col-md-9 col-12">
+                  <div class="">
+                    <textarea class="fixedInputNote"
+                              (blur)="note($event)"
+                              (keydown.enter)="note($event)"
+                              placeholder="( Không bắt buộc )"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="row form_group">
+                <div class=" col-12">
+                  <div class="text-end">
+                    <button class="myButton" (click)="returnToCart()"> Về giỏ hàng</button>
+                    <button onclick="openPage('Contact', document.getElementById('secondOpen'), ' #00B98E')"
+                            class="myButton"> Tiếp
+                      theo
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div id="Contact" class="tabcontent">
+          <div class="outLine">
+            <div class="myTitle">
+              CHỌN HÌNH THỨC GIAO HÀNG
+            </div>
+
+            <div class="formContent">
+              <div class="row">
+                <div class="col-md-4 col-12">
+                  <div class="text-start">
+                    <div class="fw-bold">
+                      <label>
+                        <input type="radio" id="deliveryToHome"
+                               value="1" name="giaoHang" (change)="deliveryCost($event)" >
+                        Giao hàng tận nơi
+                      </label>
+                    </div>
+
+                    <div class="fst-italic text-dark">
+                      Từ 49,000 ₫
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4 col-12">
+                  <div class="text-start">
+                    <div class="fw-bold">
+                      <label>
+                        <input type="radio" name="giaoHang" value="2" (change)="deliveryCost($event)">
+                        Giao hàng tiêu chuẩn
+                      </label>
+                    </div>
+
+                    <div class="fst-italic text-dark">
+                      Từ 39,000 ₫
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4 col-12">
+                  <div class="text-start">
+                    <div class="fw-bold">
+                      <label>
+                        <input type="radio" name="giaoHang" value="3" (change)="deliveryCost($event)">
+                      </label>Nhận hàng trực tiếp
+                    </div>
+
+                    <div class="fst-italic text-dark">
+                      Ưu đãi 150,000 ₫
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+
+              </div>
+
+
+            </div>
+            <div class="myTitle">
+              BẠN MUỐN THANH TOÁN THEO CÁCH NÀO ?
+            </div>
+            <div class="formContent">
+              <div class="row">
+                <div class="fw-bold">
+                  Thanh toán qua ngân hàng
+                </div>
+
+                <div class="col-md-4 imgPadding  my_border position-relative">
+                  <div class="center">
+                    <img src="../../../assets/img_longtk/usethissacb.jpg" alt="acb" class="bankImg"/>
+                  </div>
+                </div>
+
+                <div class="col-md-4 imgPadding my_border position-relative">
+                  <div class="center">
+                    <img src="../../../assets/img_longtk/newVietKom.jpg" alt="vietkom" class="bankImg"/>
+                  </div>
+                </div>
+
+                <div class="col-md-4 imgPadding my_border position-relative">
+                  <div class="center">
+                    <img src="../../../assets/img_longtk/newAgri.jpg" alt="agri" class="bankImg"/>
+                  </div>
+                </div>
+
+              </div>
+              <div class=" fw-bold margin_top">
+                <div class="fw-bold" >
+                  Thanh toán qua paypal
+                </div>
+                <div class="text-center  margin_top" (click)="getTotal()" id="paypal-button"></div>
+              </div>
+              <div class="text-end margin_top">
+                <button onclick="openPage('News', document.getElementById('defaultOpen'), ' #00B98E')"
+                        class="myButton"> Quay lại
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-4 col-12 padding0 ">
+
+
+        <div class="outLine ">
+          <div class="leftItem">
+            <div class="support">
+              <h5>
+                CÓ CÂU HỎI ?
+              </h5>
+              <div>
+                Vui lòng liên hệ đến bộ phận hỗ trợ của chúng tôi
+              </div>
+            </div>
+            <div class="detailContent">
+              Số điện thoại: 0912568989
+            </div>
+
+          </div>
+        </div>
+
+        <div class="leftItem2 outLine">
+          <div class="support">
+            <h5>
+              TỔNG KẾT ĐƠN HÀNG
+            </h5>
+            <div>
+              {{deliveryStyle}}
+            </div>
+
+          </div>
+          <div class="">
+            <div class="total">
+
+              Số tiền cần thanh toán: {{totalPrice | currency: ' ': 'symbol': '1.0-0'}} ₫
+
+
+              <img src="../../../assets/img_longtk/mascot02PNG.png" class="myImg"/>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+

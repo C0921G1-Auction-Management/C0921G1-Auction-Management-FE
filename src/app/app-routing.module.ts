@@ -28,7 +28,7 @@ const routes: Routes = [
   {
     path: 'auction-client', loadChildren: () => import('./auction-client/auction-client.module').then(module => module.AuctionClientModule)
   }
-]
+];
 
 @NgModule({
   declarations: [],

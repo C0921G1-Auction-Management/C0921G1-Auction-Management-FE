@@ -1,1 +1,126 @@
-<p>Phần của LongTK</p>
+<div class="my_background">
+  <div class="container-fluid">
+    <div class=" myContent">
+      <div class="row">
+        <div class="col-md-8 col-12 ">
+          <div class="row">
+            <div class="col-12 box_shadow ">
+              <div class="myCartTab">
+                <i class="fa-solid fa-cart-shopping"></i> GIỎ HÀNG
+              </div>
+              <div class="tableContent">
+                <table class="table  myTable">
+                  <tr>
+                    <th>Sản phẩm</th>
+                    <th class="text-end"> Giá</th>
+                  </tr>
+                  <tr *ngFor="let product of productPage">
+                    <td class="tdImage">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <img src="../../../assets/img_longtk/cart.png" alt="bag" class="img-fluid">
+                        </div>
+                        <div class="col-md-9">
+                          <h5>
+                            {{product.name}}
+                          </h5>
+
+                          <div class="note">
+                            {{product.description}}
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="price text-end">
+                        <span class="myPrice">
+                            {{product.price | currency: ' ': 'symbol': '1.0-0'}} ₫</span>
+                      </div>
+                      <div class="payNow text-end">
+                        <label for="ticked">Thanh toán </label>
+                        <input id="ticked" type="checkbox"
+                               [value]="product.id"
+                               [checked]="product.paymentStatus == 2"
+                               (change)="addToPayList($event)">
+                      </div>
+                    </td>
+                  </tr>
+
+
+                </table>
+                <nav aria-label="Page navigation example ">
+                  <div class="d-flex flex-row-reverse bd-highlight">
+                    <ul class="pagination ">
+                      <li *ngIf="p > 0"
+                          class="">
+                        <div (click)="prePage()" class="myPageLink2">Trước</div>
+                      </li>
+                      <li class="">
+                        <div class="myPageLink"> {{p + 1 }} / {{totalPage}} </div>
+                      </li>
+                      <li *ngIf="p < (totalPage - 1 ) "
+                          class="">
+                        <div (click)="nextPage()" class="myPageLink2">Sau</div>
+                      </li>
+                    </ul>
+                  </div>
+
+                </nav>
+              </div>
+
+            </div>
+            <div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-12">
+          <div class="box_shadow">
+            <div class="myCartTab">TÓM TẮT ĐƠN HÀNG</div>
+            <div class="myPadding">
+
+              <div class="row">
+                <div class="col-md-6 col-12">
+                  <div class="text-start marin20">
+                    Tổng tiền sản phẩm
+                  </div>
+                </div>
+                <div class="col-md-6 col-12">
+                  <div class=" myPrice marin20">
+                    {{sumProductsPrice | currency: ' ': 'symbol': '1.0-0'}} ₫
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-12">
+                  <div class="text-start marin20">
+                    Số lượng sản phẩm
+                  </div>
+                </div>
+                <div class="col-md-6 col-12">
+                  <div class=" myPrice marin20">
+                    {{productQuantity}}
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <button [class.myButton]="productQuantity > 0"
+                          [class.myButtonDisable]="productQuantity <=0"
+                          (click)="complete()"> HOÀN TẤT
+                  </button>
+                </div>
+                <div class="text-dark fst-italic marin20">
+                  <i class="fa-solid fa-truck-fast"></i> Giao hàng toàn quốc chỉ từ 49 000 ₫
+                </div>
+                <div>
+                  <!--                  ₫-->
+                  <img src="../../../assets/img_longtk/cart.png" class="img-fluid"/></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
