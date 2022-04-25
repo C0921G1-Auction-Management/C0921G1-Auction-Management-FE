@@ -1,0 +1,167 @@
+.DatTC-button-back-top {
+    background-color: var(--primary)!important;
+    border-color: var(--primary);
+}
+
+.DatTC-button-back-top:hover {
+    background-color: #028868 !important;
+    border-color: #028868;
+}
+
+.DatTC-brand-title {
+    color: var(--primary)!important;
+}
+
+.DatTC-button-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.DatTC-button-primary:hover {
+    background-color: #26c49f;
+    border-color: #1ac099;
+}
+
+.DatTC-banner-title {
+    color: var(--dark);
+    font-weight: 600;
+}
+
+.DatTC-banner-subtitle {
+    color: var(--primary)!important;
+}
+
+.DatTC-search {
+    background-color: var(--primary) !important;
+}
+
+.DatTC-button-secondary {
+    background-color: var(--dark);
+    border-color: var(--dark);
+
+}
+
+.DatTC-button-secondary:hover {
+    background-color: #0E2E50;
+    border-color: #0E2E50;
+}
+
+.DatTC-category-title {
+    color: var(--dark);
+    font-weight: 600;
+}
+
+.DatTC-paragraph {
+    color: #666565;
+    font-size: 20px;
+}
+
+.DatTC-category-item h6 {
+    color: var(--dark);
+    font-weight: 600;
+}
+
+.DatTC-category-item span {
+    color: var(--primary);
+}
+
+.DatTC-category-item {
+    background-color: #EFFDF5 !important;
+}
+
+.DatTC-active {
+    background-color: var(--primary);
+}
+
+.DatTC-category-button:hover {
+    background-color: var(--primary);
+}
+
+.DatTC-product-item {
+    /*height: 550px;*/
+    border-radius: 5px!important;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+}
+
+.DatTC-product-item-title {
+    color: var(--dark);
+    font-weight: 800;
+    height: 100px;
+}
+
+.DatTC-product-item-title:hover {
+    color: var(--primary);
+}
+
+.DatTC-product-item-bid {
+    color: var(--primary)!important;
+    font-weight: 600;
+}
+
+.DatTC-product-item-category {
+    color: var(--primary)!important;
+}
+
+.DatTC-product-item-time {
+    color: indianred;
+    font-weight: 600;
+}
+
+.DatTC-product-item-bid-button {
+    width: 100px;
+    display: block;
+    margin: 0 auto;
+}
+
+.DatTC-product-item-wrapper {
+    margin: 0 10px;
+}
+
+.DatTC-product-arrow-prev {
+    position: absolute;
+    top: 275px;
+    left: -60px;
+    font-size: 40px;
+    color: var(--dark);
+}
+
+.DatTC-product-arrow-prev:hover {
+    color: #144170;
+    cursor: pointer;
+}
+
+.DatTC-product-arrow-next {
+    position: absolute;
+    top: 275px;
+    right: -60px;
+    font-size: 40px;
+    color: var(--dark);
+}
+
+.DatTC-product-arrow-next:hover {
+    color: #144170;
+    cursor: pointer;
+}
+
+.DatTC-bid-rank-title {
+    color: var(--dark);
+    font-weight: 600;
+}
+
+.DatTC-bid-rank-item-name {
+    color: var(--primary);
+    font-size: 20px;
+}
+
+.DatTC-bid-rank-position {
+    color: var(--dark);
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.DatTC-feedback-title {
+    color: var(--dark);
+    font-weight: 600;
+}
+
