@@ -7,7 +7,7 @@ import {UserEditComponent} from './user-edit/user-edit.component';
 
 const routes: Routes = [
   {
-    path: 'register', component: RegisterComponent
+    path: 'registration-account', component: RegisterComponent
   },
   {
     path: 'detail', component: UserDetailComponent

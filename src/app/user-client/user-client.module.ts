@@ -4,6 +4,9 @@ import { RegisterComponent } from './register/register.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import {UserClientRoutingModule} from './user-client-routing.module';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
+import {RouterModule} from "@angular/router";
 
 
 
@@ -11,7 +14,11 @@ import {UserClientRoutingModule} from './user-client-routing.module';
   declarations: [RegisterComponent, UserDetailComponent, UserEditComponent],
   imports: [
     CommonModule,
-    UserClientRoutingModule
+    UserClientRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    RouterModule,
+    FormsModule
   ]
 })
 export class UserClientModule { }
