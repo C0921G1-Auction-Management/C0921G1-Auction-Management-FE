@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import firebase from "firebase";
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'auction-fe';
+  title = 'angular-chat';
+  constructor() {
+
+  }
+
 }

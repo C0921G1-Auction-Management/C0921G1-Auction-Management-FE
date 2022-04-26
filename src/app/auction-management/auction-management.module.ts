@@ -6,11 +6,13 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductApprovalComponent } from './product-approval/product-approval.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import {AuctionManagementRoutingModule} from './auction-management-routing.module';
+import {InstructionComponent} from "./instruction/instruction.component";
 
 
 
 @NgModule({
-  declarations: [AuctionManagementComponent, AuctionManagementDetailComponent, ProductListComponent, ProductApprovalComponent, ProductEditComponent],
+  declarations: [AuctionManagementComponent, AuctionManagementDetailComponent, ProductListComponent, ProductApprovalComponent, ProductEditComponent,
+  InstructionComponent],
   imports: [
     CommonModule,
     AuctionManagementRoutingModule

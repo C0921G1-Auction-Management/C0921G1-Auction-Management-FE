@@ -1,1 +1,149 @@
-<p>Phần của TaiLM</p>
+<h2 style="font-size:30px;text-align: center"><strong>Đăng ký sản phẩm</strong>
+</h2>
+<div class="container">
+  <form [formGroup]="productForm">
+    <div class="row">
+      <div class="col-6">
+                    <span>
+                        <label class="mt-2" for="name" style="margin-left: 10px">
+                            Tên sản phẩm*
+                        </label>
+                        <input formControlName="name" id="name" type="text">
+                        <p style="color:red;margin-left: 20px">Tên không được để trống !</p>
+                    </span>
+      </div>
+      <div class="col-6">
+            <span>
+                <label class="mt-2" for="description" style="margin-left: 10px">
+                Thông tin chi tiết sản phẩm*
+                </label>
+                <textarea formControlName="description" style="resize: none" id="description"
+                          placeholder="Mô tả sản phẩm"></textarea>
+                <p style="color:red;margin-left: 20px">Vui lòng không để trống !</p>
+            </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+                    <span>
+                        <label for="category" style="margin-left: 10px">
+                            Chủng loại*
+                        </label>
+                        <select formControlName="category" id="category" aria-label="Default select example">
+                            <option selected>Chọn</option>
+                            <option *ngFor="let category of categoryList"
+                                    [ngValue]="category">{{category.name}}</option>
+
+                        </select>
+                        <p style="color:red;margin-left: 20px">Vui lòng chọn chủng loại !</p>
+                    </span>
+      </div>
+      <div class="col-6">
+        <label for="startBid" style="margin-left: 10px">
+          Giá ban đầu*
+        </label>
+        <span>
+                        <input formControlName="startBid" id="startBid" type="text" style=" border-radius: 20px;">
+                <p style="color:red;margin-left: 20px">Vui lòng không để trống !</p>
+                <p style="color:red;margin-left: 20px">Không nhận giá trị âm !</p>
+            </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+                    <span>
+                        <label for="bidRange" style="margin-left: 10px">
+                            Mỗi lần tăng ít nhất*
+                        </label>
+                         <select formControlName="bidRange" id="bidRange" aria-label="Default select example">
+                            <option selected>Chọn</option>
+                            <option value="5000">5.000</option>
+                            <option value="10000">10.000</option>
+                            <option value="50000">50.000</option>
+                            <option value="100000">100.000</option>
+                            <option value="500000">500.000</option>
+                            <option value="1000000">1.000.000</option>
+            </select>
+                        <p style="color:red;margin-left: 20px">Vui lòng chọn một mệnh giá !</p>
+                    </span>
+      </div>
+      <div class="col-6">
+        <label for="file" style="margin-left: 10px">
+          Chọn tệp*
+        </label>
+        <span>
+                        <input formControlName="imageUrl" (change)="showImg($event)" type="file" id="file" placeholder="Chọn tệp ảnh để tải lên">
+                        <p style="color:red;margin-left: 20px">Vui lòng chọn tệp !</p>
+                        <p *ngIf="imgList.length>5" style="color:red;margin-left: 20px">Giới hạn 5 ảnh !</p>
+                        <p *ngIf="checkTypeFile" style="color:red;margin-left: 20px">Chọn đúng file ảnh !</p>
+                    </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+                    <span>
+                        <label for="startDate" style="margin-left: 10px">
+                            Ngày bắt đầu*
+                        </label>
+                        <input my-date-format="YYYY/MM/DD hh:mm:ss" formControlName="startDate" id="startDate" type="datetime-local">
+                        <p style="color:red;margin-left: 20px">Vui lòng không để trống !</p>
+                    </span>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-lg-4">
+              <img [hidden]="url == undefined" [src]="url" >
+          </div>
+          <div class="col-lg-4">
+            <img [hidden]="url1 == undefined" [src]="url1">
+          </div>
+          <div class="col-lg-4">
+            <img [hidden]="url2 == undefined" [src]="url2">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <label for="endDate" style="margin-left: 10px">
+          Ngày kết thúc*
+        </label>
+        <span>
+                        <input my-date-format="YYYY/MM/DD hh:mm:ss" formControlName="endDate" id="endDate" type="datetime-local">
+                        <p style="color:red;margin-left: 20px">Vui lòng không để trống !</p>
+                    </span>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-lg-6">
+            <img [hidden]="url3 == undefined" [src]="url3">
+          </div>
+          <div class="col-lg-6">
+            <img [hidden]="url4 == undefined" [src]="url4">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <button (click)="onSubmit()" type="button" class="btn" style="background-color: #00B98E;float: right">Đăng ký</button>
+      </div>
+      <div class="col-6">
+        <button (click)="resetForm()" type="button" class="btn" style="background-color: #00B98E;">Nhập lại</button>
+      </div>
+    </div>
+    <div class="row pb-2">
+      <div class="col-12">
+        <button type="button" class="btn position-relative" style="background-color: #cbd3da;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+               class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                  d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5zM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5z"/>
+          </svg>
+          Quay lại
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
