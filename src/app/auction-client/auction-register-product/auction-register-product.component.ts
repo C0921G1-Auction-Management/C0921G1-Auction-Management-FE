@@ -155,7 +155,7 @@ export class AuctionRegisterProductComponent implements OnInit {
   }
 
   getCurrentDateTime(): string {
-    return formatDate(new Date(), 'dd-MM-yyyyhhmmssa', 'en-US');
+    return formatDate(new Date(), 'YYYY-MM-DD HH:mm:ss', 'en-US');
   }
 
 }
