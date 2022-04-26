@@ -1,0 +1,12 @@
+<div *ngIf="!flag1">
+  <h1>Chúc mừng khách hàng : {{data.auction.members.name}}</h1>
+  <h2>đã thắng đấu giá sản phẩm: {{data.auction.product.name}}</h2>
+  <h2>với giá: {{data.auction.currentBid}}</h2>
+<!--  <button (click)="onNoClick()">close</button>-->
+</div>
+<div *ngIf="flag1">
+  <h1>khách hàng : {{data.auction.members.name}}</h1>
+  <h2>đang giữ giá thầu cao nhất hiện tại</h2>
+  <h2>Giá cao nhất hiện tại: {{data.auction.currentBid}}</h2>
+<!--  <button (click)="onNoClick()">close</button>-->
+</div>

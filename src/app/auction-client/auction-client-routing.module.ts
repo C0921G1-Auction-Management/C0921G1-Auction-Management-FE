@@ -21,7 +21,7 @@ const routes: Routes = [
     path: 'detail', component: AuctionClientDetailComponent
   },
   {
-    path: 'perform', component: AuctionClientPerformComponent
+    path: 'perform/:id', component: AuctionClientPerformComponent
   },
   {
     path: 'paypal', component: AuctionClientPaypalComponent
