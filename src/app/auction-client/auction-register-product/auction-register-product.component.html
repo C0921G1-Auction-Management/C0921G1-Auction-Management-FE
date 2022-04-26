@@ -9,18 +9,25 @@
                             Tên sản phẩm*
                         </label>
                         <input formControlName="name" id="name" type="text">
-                        <p style="color:red;margin-left: 20px">Tên không được để trống !</p>
+                        <p *ngIf="!validate && productForm.get('name').hasError('required')"
+                           style="color:red;margin-left: 20px">Tên không được để trống !</p>
+                        <p *ngIf="!validate && productForm.get('name').hasError('pattern')"
+                           style="color:red;margin-left: 20px">Tên phải viết hoa chữ cái đầu tiên và không chứa ký tự đặc biệt !</p>
                     </span>
       </div>
       <div class="col-6">
-            <span>
-                <label class="mt-2" for="description" style="margin-left: 10px">
-                Thông tin chi tiết sản phẩm*
-                </label>
-                <textarea formControlName="description" style="resize: none" id="description"
-                          placeholder="Mô tả sản phẩm"></textarea>
-                <p style="color:red;margin-left: 20px">Vui lòng không để trống !</p>
-            </span>
+
+        <span>
+                        <label for="startDate" style="margin-left: 10px">
+                            Ngày bắt đầu*
+                        </label>
+                        <input formControlName="startDate" id="startDate"
+                               type="datetime-local">
+                         <p *ngIf="!validate && productForm.get('groupDate').get('startDate').hasError('required')"
+                            style="color:red;margin-left: 20px">Vui lòng không để trống !</p>
+                           <p *ngIf="productForm.get('startDate').hasError('checkStartDate')"
+                              style="color:red;margin-left: 20px">Ngày bắt đầu phải lớn hơn ngày hiện tại !</p>
+                    </span>
       </div>
     </div>
     <div class="row">
@@ -35,18 +42,22 @@
                                     [ngValue]="category">{{category.name}}</option>
 
                         </select>
-                        <p style="color:red;margin-left: 20px">Vui lòng chọn chủng loại !</p>
+                        <p *ngIf="!validate && productForm.get('category').hasError('required')"
+                           style="color:red;margin-left: 20px">Vui lòng không để trống !</p>
                     </span>
       </div>
       <div class="col-6">
-        <label for="startBid" style="margin-left: 10px">
-          Giá ban đầu*
+
+        <label for="endDate" style="margin-left: 10px">
+          Ngày kết thúc*
         </label>
         <span>
-                        <input formControlName="startBid" id="startBid" type="text" style=" border-radius: 20px;">
-                <p style="color:red;margin-left: 20px">Vui lòng không để trống !</p>
-                <p style="color:red;margin-left: 20px">Không nhận giá trị âm !</p>
-            </span>
+                        <input formControlName="endDate" id="endDate" type="datetime-local">
+                        <p *ngIf="!validate && productForm.get('groupDate').get('endDate').hasError('required')"
+                           style="color:red;margin-left: 20px">Vui lòng không để trống !</p>
+                           <p *ngIf="productForm.get('groupDate').hasError('checkStartDateAndEndDate')"
+                              style="color:red;margin-left: 20px">Ngày kết thúc phải lớn hơn ngày bắt đầu !</p>
+                    </span>
       </div>
     </div>
     <div class="row">
@@ -64,7 +75,8 @@
                             <option value="500000">500.000</option>
                             <option value="1000000">1.000.000</option>
             </select>
-                        <p style="color:red;margin-left: 20px">Vui lòng chọn một mệnh giá !</p>
+                       <p *ngIf="!validate && productForm.get('category').hasError('required')"
+                          style="color:red;margin-left: 20px">Vui lòng không để trống !</p>
                     </span>
       </div>
       <div class="col-6">
@@ -72,28 +84,35 @@
           Chọn tệp*
         </label>
         <span>
-                        <input formControlName="imageUrl" (change)="showImg($event)" type="file" id="file" placeholder="Chọn tệp ảnh để tải lên">
+                        <input formControlName="imageUrl" (change)="showImg($event)" type="file" id="file"
+                               placeholder="Chọn tệp ảnh để tải lên">
                         <p style="color:red;margin-left: 20px">Vui lòng chọn tệp !</p>
                         <p *ngIf="imgList.length>5" style="color:red;margin-left: 20px">Giới hạn 5 ảnh !</p>
-                        <p *ngIf="checkTypeFile" style="color:red;margin-left: 20px">Chọn đúng file ảnh !</p>
+                        <p *ngIf="!validateDate" style="color:red;margin-left: 20px">Chọn đúng file ảnh !</p>
                     </span>
       </div>
     </div>
 
     <div class="row">
       <div class="col-6">
-                    <span>
-                        <label for="startDate" style="margin-left: 10px">
-                            Ngày bắt đầu*
-                        </label>
-                        <input my-date-format="YYYY/MM/DD hh:mm:ss" formControlName="startDate" id="startDate" type="datetime-local">
-                        <p style="color:red;margin-left: 20px">Vui lòng không để trống !</p>
-                    </span>
+
+        <label for="startBid" style="margin-left: 10px">
+          Giá ban đầu*
+        </label>
+        <span>
+                        <input formControlName="startBid" id="startBid" type="text" style=" border-radius: 20px;">
+                <p *ngIf="!validate && productForm.get('startBid').hasError('required')"
+                   style="color:red;margin-left: 20px">Vui lòng không để trống !</p>
+                <p *ngIf="!validate && productForm.get('startBid').hasError('min')"
+                   style="color:red;margin-left: 20px">Giá trị phải lớn hơn 5.000đ !</p>
+          <p *ngIf="!validate && productForm.get('startBid').hasError('max')"
+             style="color:red;margin-left: 20px">Giá trị không quá 5000000đ !</p>
+            </span>
       </div>
       <div class="col-6">
         <div class="row">
           <div class="col-lg-4">
-              <img [hidden]="url == undefined" [src]="url" >
+            <img [hidden]="url == undefined" [src]="url">
           </div>
           <div class="col-lg-4">
             <img [hidden]="url1 == undefined" [src]="url1">
@@ -106,12 +125,17 @@
     </div>
     <div class="row">
       <div class="col-6">
-        <label for="endDate" style="margin-left: 10px">
-          Ngày kết thúc*
-        </label>
         <span>
-                        <input my-date-format="YYYY/MM/DD hh:mm:ss" formControlName="endDate" id="endDate" type="datetime-local">
-                        <p style="color:red;margin-left: 20px">Vui lòng không để trống !</p>
+                        <label for="description" style="margin-left: 10px">
+                            Mô tả sản phầm*
+                        </label>
+          <textarea formControlName="description" id="description" type="datetime-local"></textarea>
+                        <p *ngIf="!validate && productForm.get('description').hasError('required')"
+                           style="color:red;margin-left: 20px">Vui lòng không để trống !</p>
+                        <p *ngIf="!validate && productForm.get('description').hasError('minlength')"
+                           style="color:red;margin-left: 20px">Tối thiểu 5 ký tự !</p>
+                        <p *ngIf="!validate && productForm.get('description').hasError('maxlength')"
+                           style="color:red;margin-left: 20px">Không quá 150 ký tự !</p>
                     </span>
       </div>
       <div class="col-6">
@@ -127,7 +151,22 @@
     </div>
     <div class="row">
       <div class="col-6">
-        <button (click)="onSubmit()" type="button" class="btn" style="background-color: #00B98E;float: right">Đăng ký</button>
+        <label for="finalBid" style="margin-left: 10px">
+          Giá kết thúc*
+        </label>
+        <span>
+                        <input formControlName="finalBid" id="finalBid" type="text" style=" border-radius: 20px;">
+                <p *ngIf="!validate && productForm.get('finalBid').hasError('required')"
+                   style="color:red;margin-left: 20px">Vui lòng không để trống !</p>
+                        <p *ngIf="!validate && productForm.get('finalBid').hasError('min')"
+                           style="color:red;margin-left: 20px">Tối thiểu 5.000đ !</p>
+            </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <button (click)="onSubmit()" type="button" class="btn" style="background-color: #00B98E;float: right">Đăng ký
+        </button>
       </div>
       <div class="col-6">
         <button (click)="resetForm()" type="button" class="btn" style="background-color: #00B98E;">Nhập lại</button>

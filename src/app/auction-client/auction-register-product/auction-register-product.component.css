@@ -51,3 +51,7 @@ input[type=file] {
   color: transparent !important;
   background: white;
 }
+
+textarea {
+  resize: none;
+}
