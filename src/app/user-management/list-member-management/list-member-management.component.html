@@ -1,1 +1,180 @@
-<p>Phần của NhanNT</p>
+<div class="body-AnhVN">
+
+
+  <h2 style="margin-top: 20px;margin-left: 20px;text-align: center;"><strong>Danh Sách Người Dùng</strong></h2>
+  <hr>
+  <div class="background">
+
+    <div class="container">
+      <div class="table-responsive">
+        <div class="table-wrapper">
+          <div class="table-title" style="height: 84px;">
+            <div class="row">
+
+              <!--                          Search/Filter-->
+              <div style="float: right">
+                <div class="input-group">
+                  <div style="display: flex">
+                    <!--                                            tìm theo Id-->
+                    <div class="mx-1">
+                      <input ngModel maxlength="25" autocomplete="off"
+                             type="text" class="name form-control" placeholder="ID"
+                             name="id_user">
+                    </div>
+                    <!--                                            tìm theo tên thành viên-->
+                    <div class="mx-1">
+                      <input ngModel maxlength="25" autocomplete="off"
+                             type="text" class="name form-control" placeholder="Tên thành viên"
+                             name="name">
+                    </div>
+                    <!--                                            tìm theo địa chỉ-->
+                    <div class="mx-1">
+                      <input ngModel maxlength="25" autocomplete="off"
+                             type="text" class="name form-control" placeholder="Địa chỉ"
+                             name="name">
+                    </div>
+                    <!--                                            tìm theo email-->
+                    <div class="mx-1">
+                      <input ngModel maxlength="25" autocomplete="off"
+                             type="text" class="name form-control" placeholder="Email"
+                             name="name">
+                    </div>
+                    <!--                                            tìm theo xếp hạng-->
+                    <div class="mx-1">
+                      <select class="name select-control ">
+                        <option selected disabled value="">Xếp hạng</option>
+                        <option value="4">Kim Cương</option>
+                        <option value="3">Bạch Kim</option>
+                        <option value="2">Vàng</option>
+                        <option value="1">Bạc</option>
+                        <option value="0">Thành viên</option>
+                      </select>
+                      <!--                                                <input autocomplete="off"-->
+                      <!--                                                       type="text" class="name form-control" placeholder="Xếp hạng"-->
+                      <!--                                                       name="name">-->
+                    </div>
+
+                    <!--                                            nút tìm kiếm-->
+                    <div class="mx-1">
+                      <button (click)="search()" class="btn btn-default search" type="submit"
+                              style=""><i class="glyphicon glyphicon-search text-white"
+                                          style="height: 46px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                             fill="currentColor" class="bi bi-search" viewBox="0 0 16 16"
+                             style="margin-top: 3px !important; margin-left: 3px !important">
+                          <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                      </i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+              <th class="col-1 " style="width: 3%">#</th>
+              <th class="col-1 " style="width: 3%">Chọn</th>
+              <th class="col-1 " style="width: 5%">Khoá</th>
+              <th class="col-1 " style="width: 5%">ID</th>
+              <th class="col-1 " style="width: 15%">Tên thành viên</th>
+              <th class="col-1 " style="width: 10%">Địa chỉ</th>
+              <th class="col-1 " style="width: 10%">Xếp hạng</th>
+              <th class="col-1 " style="width: 15%">Email</th>
+              <th class="col-1 " style="width: 10%">SDT</th>
+              <!--              <th class="col-1 " style="width: 15%">Lần đăng nhập cuối</th>-->
+              <th class="col-1 " style="width: 5%">Điểm</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of userModelList; index as i">
+              <td>{{i + 1}}</td>
+              <td *ngIf="item.lockFlag ==0" ><input type="checkbox" (change)="selectMember(item)" ></td>
+              <td *ngIf="item.lockFlag ==1"></td>
+
+              <td>
+                <div *ngIf="item.lockFlag == 1"> Đã Khoá</div>
+                <div *ngIf="item.lockFlag == 0"> Không</div>
+              </td>
+
+              <td>{{item.id}}</td>
+              <td>{{item.name}}</td>
+              <td>{{item.address}}</td>
+              <td>
+                <div *ngIf="item.point < 11">Bạc</div>
+                <div *ngIf="item.point >= 11 && item.point < 21">Vàng</div>
+                <div *ngIf="item.point >= 21 && item.point < 31">Bạch Kim</div>
+                <div *ngIf="item.point >= 31">Kim Cương</div>
+              </td>
+              <td>{{item.email}}</td>
+              <td>{{item.phoneNumber}}</td>
+              <!--              <td>2022-04-15 12:30:30</td>-->
+              <td>{{item.point}}</td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="clearfix row d-flex">
+            <h2 *ngIf="totalElement == 0" class="hint-text col-12"
+                style="color: #F44336; text-align: center">Không tìm thấy thành viên nào!</h2>
+            <!--                        <div *ngIf="totalElement > 0" class="hint-text col-10">Tổng cộng danh sách có <span-->
+            <!--                                style="color: orangered; font-weight: bold">1</span> trang-->
+            <!--                        </div>-->
+            <div class="hint-text col-10">
+              <button type="button" class="btn btn-info" style="height: 50px; width: 130px; background-color: #00B98E">
+                Xoá
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"
+                     viewBox="0 0 16 16">
+                  <path
+                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                  <path fill-rule="evenodd"
+                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                </svg>
+              </button>
+              <button type="button" class="btn btn-info" (click)="openDialog(listSelect)" [disabled]="listSelect.length == 0"
+                      style="height: 50px; width: 130px; background-color: #00B98E" >
+                Khoá
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-lock-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                </svg>
+              </button>
+              <button type="button" class="btn btn-info" style="height: 50px; width: 130px; background-color: #00B98E">
+                Mở khoá
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-unlock-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z"/>
+                </svg>
+              </button>
+              <button type="button" class="btn btn-info" style="height: 50px; width: 130px; background-color: #00B98E">
+                Thêm mới
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                  <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                  <path fill-rule="evenodd"
+                        d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                </svg>
+              </button>
+            </div>
+            <ul class="pagination col-2">
+              <li *ngIf="page !=0" class="page-item"><a (click)="previousPage()" class="page-link"
+                                                        style="cursor: pointer">Trước</a></li>
+              <li *ngIf="totalPagination >0" class="page-item disabled page-link"
+                  style="color: #00B98E;height: 29px">1/1
+              </li>
+              <li *ngIf="page < totalPagination-1" class=""><a (click)="nextPage()"
+                                                               class="page-link"
+                                                               style="cursor: pointer">Sau</a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

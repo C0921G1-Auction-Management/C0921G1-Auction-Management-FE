@@ -1,1 +1,31 @@
-<p>Phần của NhanNT</p>
+<div class="container" style="width: 500px;height: 1000px">
+  <div id="contact">
+    <h3>Khoá Tài Khoản</h3>
+    <h4>Luôn đảm bảo tính công bằng cho thành viên!</h4>
+    <div class="row" style="margin-bottom: 5px">
+
+<!--      <fieldset class="col-6">-->
+<!--        Từ ngày <span style="color: #F44336">*</span> <input placeholder="Your Email Address" class="form-control date-form-nhannt" type="date" tabindex="2" required>-->
+<!--        <div style="color: #F44336">Không được để trống mục này</div>-->
+<!--      </fieldset>-->
+<!--      <fieldset class="col-6">-->
+<!--        Đến ngày <span style="color: #F44336">*</span> <input placeholder="Your Phone Number" class="form-control date-form-nhannt" type="date" tabindex="3" required>-->
+<!--        <div style="color: #F44336">Không được để trống mục này</div>-->
+
+<!--      </fieldset>-->
+<!--      <div style="color: #F44336">Ngày sau không được nhỏ hơn ngày trước</div>-->
+    </div>
+    <fieldset>
+      Khoá các thành viên:
+      <textarea class="form-control"  tabindex="5" [value]="member" [attr.disabled]="true"></textarea>
+    </fieldset>
+    <fieldset>
+      Lý do
+      <textarea class="form-control" placeholder="Nhập lý do...." tabindex="5"  required></textarea>
+    </fieldset>
+    <fieldset>
+      <button name="submit" type="submit" id="submit-dia" data-submit="...Sending" (click)="onSubmit(ids)">Submit</button>
+      <button name="submit" type="submit" id="cancel-dia" data-submit="Close" (click)="cancel()">Cancel</button>
+    </fieldset>
+  </div>
+</div>
