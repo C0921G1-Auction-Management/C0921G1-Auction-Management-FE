@@ -13,11 +13,15 @@ export class AuctionedLongTKService {
   private RATE_API = 'https://free.currconv.com/api/v7/convert?q=USD_VND&compact=ultra&apiKey=7d77ed9e781fd690903a';
   httpOptions: any;
 
-
   constructor(private http: HttpClient) {
 
   }
-
+  sendMail(to: string, totalPrice: string, quantity: number, deliveryNote: string): Observable<any> {
+    console.log('mail link is : ')
+    console.log(this.AUCTIONED_API  + '/sendmail/' + '?to='+ to +'&totalPrice=' + totalPrice+'&quantity=' +quantity + '&deliveryNote=' + deliveryNote)
+    return this.http.get<ProductDTOLongTK[]>(
+      this.AUCTIONED_API  + '/sendmail/' + '?to='+ to +'&totalPrice=' + totalPrice +'&quantity=' +quantity + '&deliveryNote=' + deliveryNote);
+  }
 
   getAuctionedProduct(id: number, pageNo: number): Observable<any> {
     return this.http.get<ProductDTOLongTK[]>(
