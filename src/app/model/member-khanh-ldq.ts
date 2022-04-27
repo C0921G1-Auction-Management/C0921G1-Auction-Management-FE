@@ -7,6 +7,8 @@ export interface MemberKhanhLDQ {
   gender: number;
   email: String;
   identityNumber: String;
+  password: String;
+  confirmPassword: String;
 
   point: number;
   lockFlag: number;

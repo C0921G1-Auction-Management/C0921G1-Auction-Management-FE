@@ -7,6 +7,7 @@ import {UserClientRoutingModule} from './user-client-routing.module';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {RouterModule} from "@angular/router";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 
@@ -18,7 +19,8 @@ import {RouterModule} from "@angular/router";
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    MatProgressSpinnerModule
   ]
 })
 export class UserClientModule { }

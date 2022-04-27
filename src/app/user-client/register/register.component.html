@@ -1,1 +1,219 @@
-<p>Phần của KhanhLDQ</p>
+<div class="form_wrapper mb-5">
+  <div class="form_container">
+
+    <div class="title_container">
+      <h3>ĐĂNG KÝ THÀNH VIÊN</h3>
+    </div>
+
+    <div class="row">
+
+      <form [formGroup]="memberForm" (ngSubmit)="onSubmit()">
+
+        <!--img-->
+        <div class="input_field">
+
+          <img style="width: 100px;height: 100px" alt="avatar" class="rounded-circle border border-5 border-warning"
+               src="data:image/jpeg;base64,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">
+
+          <label for="img" style="font-weight: 500; cursor: pointer" class="ms-2">Thêm mới hình ảnh</label>
+          <input id="img" type="file" class="form-control-file" style="visibility: hidden"/>
+
+        </div>
+
+        <!--name-->
+        <div class="input_field">
+
+          <div>
+            <label for="name" class="col-form-label fw-bold">
+              Họ và Tên <span style="color: red">(*)</span></label>
+          </div>
+
+          <div>
+            <input id="name" type="text" name="name" class="form-control"
+                   formControlName="name" placeholder="Họ và Tên">
+          </div>
+
+        </div>
+
+        <!--email-->
+        <div class="input_field">
+
+          <div>
+            <label for="email" class="col-form-label fw-bold">
+              Email <span style="color: red">(*)</span>
+            </label>
+          </div>
+
+          <div>
+            <input id="email" type="email" name="email"
+                   formControlName="email" placeholder="Email">
+          </div>
+
+        </div>
+
+        <!--address-->
+        <div class="input_field">
+
+          <div>
+            <label for="address" class="col-form-label fw-bold">
+              Địa chỉ <span style="color: red">(*)</span></label>
+          </div>
+
+          <div>
+            <input id="address" type="text" name="address"
+                   formControlName="address" class="form-control" placeholder="Địa chỉ">
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <!--phone-->
+          <div class="col_half input_field">
+
+            <div>
+              <label for="phone" class="col-form-label fw-bold">
+                Số điện thoại <span style="color: red">(*)</span>
+              </label>
+            </div>
+
+            <div>
+              <input id="phone" class="form-control" type="text" name="phone"
+                     formControlName="phoneNumber" placeholder="Số điện thoại">
+            </div>
+
+          </div>
+
+          <!--gender-->
+          <div class="input_field select_option col_half">
+
+            <div>
+              <label for="gender" class="col-form-label fw-bold">
+                Giới tính <span style="color: red">(*)</span>
+              </label>
+            </div>
+
+            <div>
+              <select id="gender" name="gender" formControlName="gender"
+                      style="font-family: Verdana, Geneva, sans-serif; font-size: 16px">
+                <option selected="selected">Giới tính</option>
+                <option>Nam</option>
+                <option>Nữ</option>
+              </select>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <!--date of birth-->
+          <div class="col_half input_field">
+
+            <div>
+              <label for="dateOfBirth" class="col-form-label fw-bold">
+                Ngày sinh <span style="color: red">(*)</span>
+              </label>
+            </div>
+
+            <div>
+              <input id="dateOfBirth" type="date" name="dateOfBirth" formControlName="dayOfBirth">
+            </div>
+
+          </div>
+
+          <!--identity number-->
+          <div class="col_half input_field">
+
+            <div>
+              <label for="identityNumber" class="col-form-label fw-bold">
+                Số CMND <span style="color: red">(*)</span>
+              </label>
+            </div>
+
+            <div>
+              <input id="identityNumber" type="text" name="identityNumber"
+                     formControlName="identityNumber" placeholder="Nhập số CMND">
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="row" formGroupName="passwordFormGroup">
+
+          <!--password-->
+          <div class="col_half input_field">
+
+            <div>
+              <label for="password" class="col-form-label fw-bold">
+                Mật khẩu <span style="color: red">(*)</span>
+              </label>
+            </div>
+
+            <div>
+              <input id="password" type="password" name="password"
+                     formControlName="password" placeholder="Mật Khẩu">
+            </div>
+
+          </div>
+
+          <!--confirm password-->
+          <div class="col_half input_field">
+
+            <div>
+              <label for="confirmPassword" class="col-form-label fw-bold">
+                Nhập lại mật khẩu <span style="color: red">(*)</span>
+              </label>
+            </div>
+
+            <div>
+              <input id="confirmPassword" type="password" name="confirmPassword"
+                     formControlName="confirmPassword" placeholder="Nhập lại Mật Khẩu">
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- xác nhận-->
+
+        <div class="input_field checkbox_option">
+
+          <label class="container" for="cb1">Tôi đã đọc và đồng ý với <a class="term" target="_blank"
+                                                                         href="https://www.galaxycine.vn/chinh-sach">Chính
+            sách</a> của chương trình<span style="color: red">*</span>
+            <input type="checkbox" id="cb1" formControlName="check">
+            <div style="color: red" *ngIf="memberForm.get('check').hasError('required') && submitted">Vui lòng xác nhận chính sách</div>
+            <span class="checkmark"></span>
+
+          </label>
+        </div>
+
+<!--        button dang ky-->
+        <div class="row mt-3">
+          <div>
+            <input class="button" type="submit" value="Đăng Ký"/>
+          </div>
+        </div>
+
+<!--        button back - clear data-->
+        <div class="row">
+
+          <div class="col_half">
+            <input class="button" type="submit"
+                   routerLink="" value="Quay lại trang đấu giá"/>
+          </div>
+
+          <div class="col_half">
+            <input class="button" type="submit"
+                   (click)="clearData()" value="Tạo mới dữ liệu"/>
+          </div>
+
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
