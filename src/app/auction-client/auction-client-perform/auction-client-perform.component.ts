@@ -162,7 +162,4 @@ export class AuctionClientPerformComponent implements OnInit {
     this.selectedPrice = currentPrice;
     console.log(this.selectedPrice);
   }
-
-
-
 }
