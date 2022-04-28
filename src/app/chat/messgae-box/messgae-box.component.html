@@ -1,0 +1,68 @@
+<div class="custom-message-box"*ngIf="isDisplay; else elseBlock">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  <div class="form_wrapper">
+    <div class="container">
+
+      <div>
+        <div class="row title_row" style="margin-bottom: 29px;margin-top: -38px;">
+          <div class="col-9 phone">Điện thoại hỗ trợ: 0919999999</div>
+          <div class="col-3">
+            <input type="button" value="Đóng" (click)="hiddenChat()">
+          </div>
+        </div>
+
+        <div #chatcontent [scrollTop]="scrolltop" class="chat-content">
+          <div *ngFor="let chat of chats">
+            <div class="user" *ngIf="chat.nickname !== 'admin'; else elseBlock">
+              <div class="d-flex flex-row-reverse bd-highlight">
+                <img src="https://emoji.slack-edge.com/TEBPXS5HQ/duongvaotimem/29e0c9b8591cb676.jpg"
+                     class="rounded-circle" alt="..."><span class="user-avt">User</span>
+              </div>
+              <div class="d-flex flex-row-reverse bd-highlight">
+                <div class="chat-user">{{chat.message}}</div>
+              </div>
+            </div>
+            <ng-template #elseBlock>
+              <div class="admin">
+                <div>
+                  <img src="https://emoji.slack-edge.com/TEBPXS5HQ/nhandeptrai/12a2784921deea78.png"
+                       class="rounded-circle" alt="..."><span class="admin-avt">Admin</span>
+                </div>
+                <div class="chat-admin">{{chat.message}}</div>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+
+
+        <form [formGroup]="chatForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-11">
+              <div class="input_field">
+                <input type="text" class="chat-cont" formControlName="message" autocomplete="off"
+                       placeholder="Gõ vào đây và nhấn Enter"/>
+              </div>
+            </div>
+
+            <div class="col-1">
+              <button class="chatbutton" type="submit">
+                <i class="bi_chat bi-send-check-fill"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+
+
+    </div>
+  </div>
+
+
+</div>
+<ng-template #elseBlock>
+  <div class="custom-message-box-button">
+    <input type="button" value="Tin nhắn tư vấn" (click)="displayChat()">
+  </div>
+</ng-template>

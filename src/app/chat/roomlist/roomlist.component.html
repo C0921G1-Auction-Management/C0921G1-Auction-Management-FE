@@ -1,0 +1,11 @@
+ok
+<div class="col-2">
+
+  <p>Danh sách chat</p>
+  <div style="background: white; height: 400px; width: 100%">
+    <div *ngFor="let room of rooms">
+      <div (click)="enterChatRoom(room.roomname)" style="margin-bottom: 10px">{{room.roomname}}</div>
+    </div>
+
+  </div>
+</div>

@@ -14,6 +14,9 @@ const routes: Routes = [
     path: 'home/:status', component: HomeComponent
   },
   {
+    path: 'statistical', loadChildren: () => import('./statistical/statistical.module').then(module => module.StatisticalModule)
+  },
+  {
     path: 'member', loadChildren: () => import('./user-management/user-management.module').then(module => module.UserManagementModule)
   },
   {
@@ -27,6 +30,10 @@ const routes: Routes = [
   },
   {
     path: 'auction-client', loadChildren: () => import('./auction-client/auction-client.module').then(module => module.AuctionClientModule)
+  },
+  {
+    path: 'chat',
+    loadChildren: () => import('./chat/chat-routing.module').then(module => module.ChatRoutingModule)
   }
 ]
 
