@@ -7,6 +7,7 @@ import {CurrencyPipe, formatDate} from "@angular/common";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {finalize} from "rxjs/operators";
 import {ValidateDate} from "../../model/ValidateStartDate";
+import {ProductTaiLM} from "../../model/product-tai-lm";
 
 
 
@@ -27,6 +28,8 @@ export class AuctionRegisterProductComponent implements OnInit {
   url3: string;
   url4: string;
   money: number;
+  product: ProductTaiLM;
+  validateImg =true;
   validate: boolean = true;
   validateDate = new ValidateDate();
   constructor(private productTaiLMService: RegisterProductTaiLMService,
@@ -37,17 +40,23 @@ export class AuctionRegisterProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.getListCategory();
+    this.validate = true;
+    this.url = undefined;
+    this.url1 = undefined;
+    this.url2 = undefined;
+    this.url3 = undefined;
+    this.url4 = undefined;
     this.productForm = this.fb.group({
       name: new FormControl('',[Validators.required,Validators.pattern('^([A-ZĐ][a-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ]+)( [A-ZĐ\\d][a-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ]*)*$')]),
-      startBid: new FormControl('',[Validators.required,Validators.min(5000),Validators.max(5000000)]),
-      bidRange: new FormControl('',[Validators.required,Validators.min(5000)]),
+      startBid: new FormControl('',[Validators.required,Validators.min(1000),Validators.max(50000)]),
+      bidRange: new FormControl('',[Validators.required,Validators.min(5000),Validators.max(1000000)]),
       finalBid: new FormControl('',[Validators.required,Validators.min(50000)]),
-      imageUrl: new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(2000)]),
+      imageUrl: new FormControl('',[Validators.required]),
       groupDate: new FormGroup({
         startDate: new FormControl('',[Validators.required,this.validateDate.checkStartDate]),
         endDate: new FormControl('',[Validators.required]),
       },this.validateDate.checkStartDateAndEndDate),
-      description: new FormControl('',[Validators.required,Validators.maxLength(150),Validators.minLength(5)]),
+      description: new FormControl('',[Validators.required,Validators.minLength(5)]),
       category: new FormControl('',[Validators.required]),
     })
 
@@ -70,19 +79,36 @@ export class AuctionRegisterProductComponent implements OnInit {
 
   //đăng ký sản phẩm
   onSubmit(){
+    this.productForm.get('startBid').setValue(this.formatStartBid(this.productForm.get('startBid').value));
+    this.productForm.get('bidRange').setValue(Number(this.productForm.get('bidRange').value));
+    this.uploadImgFireBase();
+
+    //bien form thanh object assign
+    this.product = Object.assign({}, this.productForm.value);
+    this.product.startDate = this.productForm.value.groupDate.startDate;
+    this.product.endDate = this.productForm.value.groupDate.endDate;
     if(this.productForm.valid){
-      this.productForm.get('startBid').setValue(this.formatStartBid(this.productForm.get('startBid').value));
-      this.uploadImgFireBase();
-      this.fomartDate(this.productForm.get('startDate').value,this.productForm.get('endDate').value)
-      this.productTaiLMService.registerProduct(this.productForm.value).subscribe(value => {
+      this.fomartDate(this.productForm.get('groupDate').get('startDate').value,this.productForm.get('groupDate').get('endDate').value);
+      this.productTaiLMService.registerProduct(this.product).subscribe(value => {
       });
       this.validate = true;
+      console.log(this.validate)
     }else{
+      //currencyPipe pipe
+      this.productForm.valueChanges.subscribe( form => {
+        if (form.startBid){
+          this.productForm.patchValue({
+            startBid: this.currencyPipe.transform(form.startBid.replace(/\D/g, '').
+            replace(/^0+/, ''), 'VND', 'symbol', '1.0-0')
+          }, {emitEvent: false});
+        }
+      })
       this.validate = false;
     }
 
   }
 
+    //format startBid
   formatStartBid(startBid: string): any{
   this.productForm.get('startBid').setValue(startBid.split(/[\D,\s]/));
     const startBidList =this.productForm.get('startBid').value
@@ -90,9 +116,13 @@ export class AuctionRegisterProductComponent implements OnInit {
     for(let i = 1; i < startBidList.length; i++) {
       format += startBidList[i];
     }
-    return (format);
+    if (format != ' '){
+      return format;
+    }else return Number(format);
+
   }
 
+  //uploadFireBase
   uploadImgFireBase(){
     for (let i = 0; i <this.imgFireBaseList.length ; i++) {
         const nameImg = this.getCurrentDateTime() + this.imgFireBaseList[i].name;
@@ -101,7 +131,6 @@ export class AuctionRegisterProductComponent implements OnInit {
           finalize(() => {
               fileRef.getDownloadURL().subscribe((url) => {
                 this.productForm.get("imgUrl").setValue(this.productForm.get("imgUrl").value.push(url));
-                console.log(this.productForm.get("imgUrl").value)
               })
             }
           )
@@ -122,6 +151,7 @@ export class AuctionRegisterProductComponent implements OnInit {
   //load ảnh lên template
   showImg(event: any){
     if (this.checkFile(event.target.value)){
+      this.validateImg = true;
       if (event.target.files && this.imgList.length <5) {
         this.imgFireBaseList.push(event.target.files[0]);
         const reader = new FileReader();
@@ -150,7 +180,7 @@ export class AuctionRegisterProductComponent implements OnInit {
         }
       }
     }else {
-     this.productForm.get('imgUrl').invalid;
+     this.validateImg = false;
     }
 
 
@@ -158,17 +188,20 @@ export class AuctionRegisterProductComponent implements OnInit {
 
   resetForm(){
     this.ngOnInit();
+    this.imgFireBaseList.length =0;
   }
 
   getCurrentDateTime() {
-    return formatDate(new Date(), 'YYYY-MM-DD HH:mm:ss', 'en-US');
+    return formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss', 'en-US');
   }
 
   fomartDate(startDate: string, endDate: string){
     const startFomart = new Date(startDate);
     const endFomart = new Date(endDate);
-    this.productForm.get('startDate').setValue(formatDate(startFomart, 'yyyy-MM-dd HH:mm:ss', 'en-US'));
-    this.productForm.get('endDate').setValue(formatDate(endFomart, 'yyyy-MM-dd HH:mm:ss', 'en-US'));
+
+    this.productForm.get('groupDate').get('startDate').setValue(formatDate(startFomart, 'yyyy-MM-dd HH:mm:ss', 'en-US'));
+    this.productForm.get('groupDate').get('endDate').setValue(formatDate(endFomart, 'yyyy-MM-dd HH:mm:ss', 'en-US'));
+
   }
 
 
