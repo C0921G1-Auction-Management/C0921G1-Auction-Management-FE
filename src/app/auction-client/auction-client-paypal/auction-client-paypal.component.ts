@@ -2,24 +2,36 @@ import {Component, OnInit} from '@angular/core';
 import {AuctionedLongTKService} from "../LongTKService/auctioned-long-tk.service";
 import {ProductDTOLongTK} from "../../model/LongTK/ProductDTOLongTK";
 import {MemberLongTK} from "../../model/LongTK/MemberLongTK";
-
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 import {Router} from "@angular/router";
 import {DataLongtkService} from "../LongTKService/data-longtk.service";
+import {animate, AUTO_STYLE, state, style, transition, trigger} from "@angular/animations";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 declare var paypal;
 let finalPay: string;
 
+const DEFAULT_DURATION = 300;
 
 @Component({
   selector: 'app-auction-client-paypal',
   templateUrl: './auction-client-paypal.component.html',
-  styleUrls: ['./auction-client-paypal.component.css']
+  styleUrls: ['./auction-client-paypal.component.css'],
+  animations: [
+    trigger('collapse', [
+      state('false', style({height: AUTO_STYLE, visibility: AUTO_STYLE})),
+      state('true', style({height: '0', visibility: 'hidden'})),
+      transition('false => true', animate(DEFAULT_DURATION + 'ms ease-in')),
+      transition('true => false', animate(DEFAULT_DURATION + 'ms ease-out'))
+    ])
+  ]
 })
 export class AuctionClientPaypalComponent implements OnInit {
 
   constructor(private  auctonedSerivce: AuctionedLongTKService,
               private dataService: DataLongtkService,
-              private router: Router) {
+              private router: Router,
+  ) {
   }
 
   payPrice: string
@@ -27,7 +39,6 @@ export class AuctionClientPaypalComponent implements OnInit {
   quantity: number;
   totalProductPrice: number;
   totalPrice: number;
-  mailList: string;
   member: MemberLongTK;
   memberAddress: string;
   memberCity = 'Hà Nội';
@@ -37,6 +48,10 @@ export class AuctionClientPaypalComponent implements OnInit {
   deliveryStyle = '(No)';
   usdToVndRate: number;
   isPaypalLoad: boolean = false;
+  collapsedAgri = true;
+  collapsedAcb = true;
+  collapsedVietkom = true;
+  bankForm: FormGroup;
 
   ngOnInit(): void {
     this.dataService.takeMemberId.subscribe(value => {
@@ -51,39 +66,112 @@ export class AuctionClientPaypalComponent implements OnInit {
         this.auctonedSerivce.oneUsdToVndRate().subscribe(value => {
           this.usdToVndRate = Number(value.USD_VND);
           document.getElementById("deliveryToHome").click();
+
           if (this.isPaypalLoad == false) {
             this.callPaypal();
           }
-
-
         })
       })
     })
 
-
-    let contentProduct: string;
-
     this.dataService.takeProductList.subscribe(value => {
       this.productList = value;
-
-      for (let pro of this.productList) {
-        contentProduct += '<tr> ' +
-          '<td>' + pro.name + ' </td>' +
-          '<td> ' + pro.price + '</td>' +
-          '</tr>';
-      }
-      this.mailList = '<table>' + contentProduct + '</table>'
+      console.log(this.productList)
     });
-
     this.dataService.takeQuantity.subscribe(value => {
       this.quantity = value;
     });
-
     this.dataService.takeTotalPrice.subscribe(value => {
       this.totalProductPrice = value;
       this.totalPrice = this.totalProductPrice + 49000;
     });
-    document.getElementById("defaultOpen").click();
+    document.getElementById("secondOpen").click();
+    // document.getElementById("defaultOpen").click();
+
+    this.bankForm = new FormGroup({
+      bankCode: new FormControl('', Validators.required),
+      pinCode: new FormControl('', Validators.required)
+    });
+  }
+
+  payProductIdList() {
+    let listId: string = '';
+    for (let pro of this.productList) {
+      if (pro.paymentStatus == 2) {
+        listId += pro.id + ',';
+      }
+    }
+    console.log(listId)
+    return listId;
+  }
+
+  confirmBank() {
+    let phone = this.member.phoneNumber;
+    let timerInterval;
+    let t = this;
+    Swal.fire({
+      icon: 'success',
+      title: 'XÁC NHẬN',
+      html: 'OTP đã được gửi qua số điện thoại <strong>' + phone + '</strong> trong ít phút nữa <br>' +
+        'Quý khách vui lòng xác nhận tin nhắn giao dịch',
+      timer: 2300,
+      didOpen: () => {
+        Swal.showLoading()
+        const b = Swal.getHtmlContainer().querySelector('b')
+        timerInterval = setInterval(() => {
+          b.textContent = Swal.getTimerLeft()
+        }, 100)
+      },
+      willClose: () => {
+        clearInterval(timerInterval)
+      }
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
+        this.auctonedSerivce.changeProductStatus(this.payProductIdList()).subscribe();
+        this.removeProduct();
+
+      }
+    })
+  }
+
+  removeProduct() {
+    this.productList.splice(0, this.productList.length);
+    if (this.productList.length == 0) {
+      this.dataService.sendReturnProductList(this.productList)
+      this.router.navigate(['/auction-client/auctioned']);
+    }
+  }
+
+  switchShowHideAgri() {
+    this.collapsedAcb = true;
+    this.collapsedVietkom = true;
+    if (this.collapsedAgri == false) {
+      this.collapsedAgri = true;
+    } else {
+      this.collapsedAgri = false
+    }
+  }
+
+  switchShowHideAcb() {
+    this.collapsedAgri = true;
+    this.collapsedVietkom = true;
+    if (this.collapsedAcb == false) {
+      this.collapsedAcb = true;
+    } else {
+      this.collapsedAcb = false
+    }
+  }
+
+  switchShowHideVietkom() {
+    this.collapsedAgri = true;
+    this.collapsedAcb = true;
+    if (this.collapsedVietkom == false) {
+      this.collapsedVietkom = true;
+    } else {
+      this.collapsedVietkom = false
+    }
   }
 
   sendMail(price: string) {
@@ -93,10 +181,8 @@ export class AuctionClientPaypalComponent implements OnInit {
 
   callPaypal() {
     this.isPaypalLoad = true;
-
     let t = this;
     paypal.Button.render({
-
       // Configure environment
       env: 'sandbox',
       client: {
@@ -110,9 +196,7 @@ export class AuctionClientPaypalComponent implements OnInit {
         color: 'gold',
         shape: 'pill',
       },
-
       commit: true,
-
       // LongTK Set up a payment
       payment: function (data, actions) {
         return actions.payment.create({
@@ -123,21 +207,17 @@ export class AuctionClientPaypalComponent implements OnInit {
             }
           }]
         });
-
       },
       // Execute the payment
       onAuthorize: function (data, actions) {
         return actions.payment.execute().then(function () {
           // Show a confirmation message to the buyer
-
-          // cần có biến t = this để gọi method sendMail - > là cái gọi qua API sendmail bên back end
           t.sendMail(finalPay);
-
+          t.removeProduct();
         });
       }
     }, '#paypal-button')
   }
-
 
   choseCity(event) {
     this.memberCity = (event.target.value);
@@ -186,4 +266,6 @@ export class AuctionClientPaypalComponent implements OnInit {
     this.payPrice = Number(this.totalPrice / this.usdToVndRate).toFixed(2);
     finalPay = this.payPrice;
   }
+
+
 }

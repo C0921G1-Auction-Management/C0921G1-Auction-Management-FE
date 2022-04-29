@@ -119,7 +119,7 @@
                     <div class="fw-bold">
                       <label>
                         <input type="radio" id="deliveryToHome"
-                               value="1" name="giaoHang" (change)="deliveryCost($event)" >
+                               value="1" name="giaoHang" (change)="deliveryCost($event)">
                         Giao hàng tận nơi
                       </label>
                     </div>
@@ -174,27 +174,88 @@
                   Thanh toán qua ngân hàng
                 </div>
 
-                <div class="col-md-4 imgPadding  my_border position-relative">
-                  <div class="center">
-                    <img src="../../../assets/img_longtk/usethissacb.jpg" alt="acb" class="bankImg"/>
+                <div class="col-md-4 imgPadding   position-relative"
+                     [class.gradientBG]="collapsedAcb === false">
+                  <div class="center "
+                       [class.my_border]="collapsedAcb === true">
+                    <img class="bankImg "
+                         (click)="switchShowHideAcb()" src="../../../assets/img_longtk/usethissacb.png"/>
+                  </div>
+                  <div class="collapsible mysection divContent" [@collapse]="collapsedAcb">
+                    <form action="" [formGroup]="bankForm">
+                      <input formControlName="bankCode" type="text" class="fixedInputBank myCollapse"
+                             placeholder="Mã ngân hàng">
+                      <input formControlName="pinCode" type="text" class="fixedInputBank myCollapse"
+                             placeholder="Mã PIN">
+                    </form>
+
+                    <div class="d-flex flex-row-reverse">
+                      <button (click)="confirmBank()"
+                              [class.bankDisabled]="bankForm.invalid"
+                              [class.bankButton]="bankForm.valid"
+                              class="bankButton p-2"> Thanh toán
+                      </button>
+                    </div>
+                  </div>
+
+
+                </div>
+
+                <div class="col-md-4 imgPadding  position-relative"
+                     [class.gradientBG]="collapsedVietkom === false">
+                  <div class="center"
+                       [class.my_border]="collapsedVietkom === true">
+                    <img (click)="switchShowHideVietkom()" src="../../../assets/img_longtk/newVietKom.png"
+                         class="bankImg"/>
+                  </div>
+
+                  <div class="collapsible mysection divContent" [@collapse]="collapsedVietkom">
+                    <form action="" [formGroup]="bankForm">
+                      <input formControlName="bankCode" type="text" class="fixedInputBank myCollapse"
+                             placeholder="Mã ngân hàng">
+                      <input formControlName="pinCode" type="text" class="fixedInputBank myCollapse"
+                             placeholder="Mã PIN">
+                    </form>
+
+                    <div class="d-flex flex-row-reverse">
+                      <button (click)="confirmBank()"
+                              [class.bankDisabled]="bankForm.invalid"
+                              [class.bankButton]="bankForm.valid"
+                              class="bankButton p-2"> Thanh toán
+                      </button>
+                    </div>
                   </div>
                 </div>
 
-                <div class="col-md-4 imgPadding my_border position-relative">
-                  <div class="center">
-                    <img src="../../../assets/img_longtk/newVietKom.jpg" alt="vietkom" class="bankImg"/>
-                  </div>
-                </div>
+                <div class="col-md-4 imgPadding position-relative"
+                     [class.gradientBG]="collapsedAgri === false">
+                  <div class="center"
+                       [class.my_border]="collapsedAgri === true">
 
-                <div class="col-md-4 imgPadding my_border position-relative">
-                  <div class="center">
-                    <img src="../../../assets/img_longtk/newAgri.jpg" alt="agri" class="bankImg"/>
+                    <img class="bankImg" (click)="switchShowHideAgri()" src="../../../assets/img_longtk/newAgri.png"/>
+                  </div>
+                  <div class=" collapsible mysection divContent" [@collapse]="collapsedAgri">
+                    <form action="" [formGroup]="bankForm">
+                      <input formControlName="bankCode" type="text" class="fixedInputBank myCollapse"
+                             placeholder="Mã ngân hàng">
+                      <input formControlName="pinCode" type="text" class="fixedInputBank myCollapse"
+                             placeholder="Mã PIN">
+                    </form>
+
+                    <div class="d-flex flex-row-reverse">
+                      <button (click)="confirmBank()"
+                              [class.bankDisabled]="bankForm.invalid"
+                              [class.bankButton]="bankForm.valid"
+                              class="bankButton p-2"> Thanh toán
+                      </button>
+                    </div>
+
                   </div>
                 </div>
 
               </div>
               <div class=" fw-bold margin_top">
-                <div class="fw-bold" >
+                <div class="fw-bold">
                   Thanh toán qua paypal
                 </div>
                 <div class="text-center  margin_top" id="paypal-button"></div>
@@ -261,3 +322,26 @@
 </div>
 
 
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

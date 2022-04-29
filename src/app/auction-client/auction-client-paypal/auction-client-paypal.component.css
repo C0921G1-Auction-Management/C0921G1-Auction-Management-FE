@@ -1,3 +1,4 @@
+
 .myContent {
   width: 90%;
   margin: 80px auto 80px auto;
@@ -10,7 +11,6 @@ body {
 
 * {
   box-sizing: border-box !important;
-
 }
 
 .row {
@@ -52,7 +52,7 @@ strong {
   color: gray;
 }
 
-.fixedInput2, .fixedInputNote {
+.fixedInput2, .fixedInputNote, .fixedInputBank {
   line-height: 23px;
   width: 100%;
   padding: 3px 15px;
@@ -61,12 +61,17 @@ strong {
 
 }
 
-.fixedInput2 {
+.fixedInput2, .fixedInputBank {
   border-radius: 30px;
 }
 
 .fixedInput2:focus, .fixedInputNote:focus {
   outline: solid 2px #00B98E;
+}
+
+.fixedInputBank:focus {
+  outline: none !important;
+  border: solid 1px #00B98E;
 }
 
 
@@ -99,7 +104,38 @@ textarea:focus {
   transition: background-color 350ms, color 350ms, border 350ms;
 }
 
-.myButton:hover {
+.bankButton {
+  display: flex !important;
+  justify-content: flex-end !important;
+  max-width: 150px;
+  min-width: 25px;
+  border-radius: 20px;
+  box-shadow: 0 0px 10px white !important;
+  margin: 10px 0;
+  padding: 5px 10px;
+  height: max-content !important;
+  border: solid 1px transparent;
+  color: white;
+  background: #00B98E;
+  transition: background-color 350ms, color 350ms, border 350ms;
+}
+
+.bankDisabled{
+  display: flex !important;
+  justify-content: flex-end !important;
+  max-width: 150px;
+  min-width: 25px;
+  border-radius: 20px;
+  color: white;
+  background: gray;
+  cursor: no-drop;
+  margin: 10px 0;
+  padding: 5px 10px;
+  height: max-content !important;
+  border: solid 1px transparent;
+}
+
+.myButton:hover, .bankButton:hover {
   color: #00B98E;
   border: solid 1px #00B98E;
   background: white;
@@ -242,12 +278,19 @@ textarea:focus {
 }
 
 .my_border:hover {
-  border: solid 1px #00B98E;
+  box-shadow: 0px 0px 10px #00B98E !important;
+}
+
+.gradientBG {
+  outline: solid 1px #00eeb0 !important;
+  background: rgb(220, 255, 235);
+  background: linear-gradient(209deg, rgba(220, 255, 235, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(167, 255, 235, 1) 100%) !important;
 }
 
 .my_border {
-  border: solid 1px transparent;
-  transition: border 400ms;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px transparent;
+  transition: box-shadow 400ms;
 }
 
 .center {
@@ -256,7 +299,41 @@ textarea:focus {
   justify-content: center !important;
 }
 
-.margin_top{
+.margin_top {
   margin-top: 50px;
+}
+
+.changeBackGround3 {
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px #00B98E !important;
+  transition: visibility 350s, opacity 350ms linear;
+  transition-property: visibility;
+  transition-duration: 5s;
+  transition-delay: 2s;
+}
+
+
+/*dropd collapse animation*/
+.collapsible {
+  overflow: hidden;
+}
+
+.mysection {
+
+  box-sizing: border-box;
+}
+
+.mysection.collapsible {
+  color: white;
+
+}
+
+.myCollapse {
+  margin: 10px auto;
+}
+
+.divContent {
+  width: 90%;
+  margin: auto !important;
 }
 

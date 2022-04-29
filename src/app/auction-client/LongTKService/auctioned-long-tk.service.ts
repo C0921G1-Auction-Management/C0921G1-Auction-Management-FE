@@ -16,11 +16,12 @@ export class AuctionedLongTKService {
   constructor(private http: HttpClient) {
 
   }
+
   sendMail(to: string, totalPrice: string, quantity: number, deliveryNote: string): Observable<any> {
     console.log('mail link is : ')
-    console.log(this.AUCTIONED_API  + '/sendmail/' + '?to='+ to +'&totalPrice=' + totalPrice+'&quantity=' +quantity + '&deliveryNote=' + deliveryNote)
+    console.log(this.AUCTIONED_API + '/sendmail/' + '?to=' + to + '&totalPrice=' + totalPrice + '&quantity=' + quantity + '&deliveryNote=' + deliveryNote)
     return this.http.get<ProductDTOLongTK[]>(
-      this.AUCTIONED_API  + '/sendmail/' + '?to='+ to +'&totalPrice=' + totalPrice +'&quantity=' +quantity + '&deliveryNote=' + deliveryNote);
+      this.AUCTIONED_API + '/sendmail/' + '?to=' + to + '&totalPrice=' + totalPrice + '&quantity=' + quantity + '&deliveryNote=' + deliveryNote);
   }
 
   getAuctionedProduct(id: number, pageNo: number): Observable<any> {
@@ -43,9 +44,15 @@ export class AuctionedLongTKService {
       this.AUCTIONED_API + '/findMemer/' + id);
   }
 
-  oneUsdToVndRate(): Observable<any>{
+  oneUsdToVndRate(): Observable<any> {
     return this.http.get<string>(
       this.RATE_API);
+  }
+
+  changeProductStatus(prolistId: string): Observable<any> {
+
+    return this.http.get<void>(
+      this.AUCTIONED_API + '/changeStatus?proList=' + prolistId);
   }
 
 

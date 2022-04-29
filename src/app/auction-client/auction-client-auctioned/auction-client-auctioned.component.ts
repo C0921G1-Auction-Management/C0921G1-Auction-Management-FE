@@ -33,6 +33,7 @@ export class AuctionClientAuctionedComponent implements OnInit {
     // sau khi đã chọn sản phẩm
     this.dataService.takeReturnProductList.subscribe(value => {
       this.allProductList = value;
+      console.log(  this.allProductList.length);
       if (this.allProductList.length == 0) {
         this.auctionedService.getListProduct(this.idMember).subscribe(value => {
           this.allProductList = value;
@@ -46,13 +47,8 @@ export class AuctionClientAuctionedComponent implements OnInit {
         this.sumPrice()
       }
     })
-
-
   }
-
   totalPage: number;
-
-
   getProductList(memberId: number, page: number) {
     this.auctionedService.getAuctionedProduct(memberId, page).subscribe(value => {
       this.productPage = value['content'];
@@ -67,7 +63,6 @@ export class AuctionClientAuctionedComponent implements OnInit {
       this.errorMsg = 'Không có dữ liệu';
     });
   }
-
   nextPage() {
     if (this.p < this.totalPage - 1) {
       this.p++;

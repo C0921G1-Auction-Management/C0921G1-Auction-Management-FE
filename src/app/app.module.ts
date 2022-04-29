@@ -15,6 +15,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {NgxPaginationModule} from "ngx-pagination";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
 
@@ -29,6 +30,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
   ],
   imports: [
 
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
     NgxPaginationModule,

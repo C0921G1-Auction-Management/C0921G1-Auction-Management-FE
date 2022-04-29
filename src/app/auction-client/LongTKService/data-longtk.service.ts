@@ -35,6 +35,7 @@ export class DataLongtkService {
   }
 
   sendReturnProductList(prodList: ProductDTOLongTK[]) {
+    console.log('data service: ' + prodList.length)
     this.returnProductList.next(prodList);
   }
 
